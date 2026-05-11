@@ -1,12 +1,17 @@
+import Image from 'next/image';
+
 export default function Footer() {
   return (
     <footer className="border-t border-slate-100 bg-white py-10">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <div className="flex items-center gap-2">
-          <span className="text-base font-bold tracking-tight text-slate-900">가다 데스크</span>
-          <span className="text-[11px] font-medium text-slate-400">
-            GADA Desk for Manpower Offices
-          </span>
+        <div className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="가다 데스크"
+            width={922}
+            height={250}
+            className="h-7 w-auto"
+          />
         </div>
 
         <dl className="mt-5 grid gap-x-8 gap-y-2 text-xs leading-relaxed text-slate-500 sm:grid-cols-[auto_1fr]">

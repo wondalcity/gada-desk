@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 
 const NAV = [
@@ -16,11 +17,15 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-100 bg-white/85 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-8">
-        <a href="#top" aria-label="가다 데스크 홈" className="flex items-baseline gap-2">
-          <span className="text-lg font-bold tracking-tight text-slate-900">가다 데스크</span>
-          <span className="hidden text-[11px] font-medium text-slate-400 sm:inline">
-            GADA Desk for Manpower Offices
-          </span>
+        <a href="#top" aria-label="가다 데스크 홈" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="가다 데스크"
+            width={922}
+            height={250}
+            priority
+            className="h-7 w-auto md:h-8"
+          />
         </a>
 
         <nav className="hidden items-center gap-7 md:flex" aria-label="메인 내비게이션">
