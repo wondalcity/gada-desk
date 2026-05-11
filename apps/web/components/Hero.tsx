@@ -25,7 +25,7 @@ type Tone = 'done' | 'planning' | 'permanent';
 const DAILY_SITE_NAMES = ['A 현장', 'B 현장', 'C 현장', 'D 현장'];
 const PERMANENT_SITE_NAME = 'E 현장';
 
-const DEFAULT_STATS: Stats = { attendance: 200, sites: 20, applicants: 400 };
+const DEFAULT_STATS: Stats = { attendance: 720, sites: 80, applicants: 1500 };
 
 const DEFAULT_SITES: Site[] = [
   { id: 'A 현장', name: 'A 현장', head: 75, tomorrowHead: 72 },
@@ -60,18 +60,17 @@ function mulberry32(seed: number) {
 function dailyData(d: Date): { stats: Stats; sites: Site[] } {
   const rng = mulberry32(getDateSeed(d));
 
-  const attendance = Math.floor(rng() * 201) + 100;
-  const perSite = Math.floor(rng() * 19) + 2;
-  const sites = Math.max(1, Math.round(attendance / perSite));
-  const multiplier = 1.5 + rng() * 1.5;
+  const attendance = Math.floor(rng() * 501) + 500;
+  const sites = Math.floor(rng() * 351) + 150;
+  const multiplier = 1.8 + rng() * 1.7;
   const applicants = Math.round(attendance * multiplier);
 
   const count = DAILY_SITE_NAMES.length;
-  const weights = Array.from({ length: count }, () => 0.1 + rng() * 1.5);
-  const wSum = weights.reduce((a, b) => a + b, 0);
-  const heads = weights.map((w) => Math.max(1, Math.round((w / wSum) * attendance)));
-  const diff = attendance - heads.reduce((a, b) => a + b, 0);
-  heads[0] = Math.max(1, heads[0] + diff);
+  const smallIdx = Math.floor(rng() * count);
+  const heads = Array.from({ length: count }, (_, i) => {
+    if (i === smallIdx) return Math.floor(rng() * 9) + 1;
+    return Math.floor(rng() * 60) + 30;
+  });
 
   const tomorrowHeads = heads.map((h) => Math.max(1, Math.round(h * (0.85 + rng() * 0.3))));
 
