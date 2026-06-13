@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { Building2, ShieldCheck, LayoutDashboard, Zap } from 'lucide-react';
+import { ADD_ON_PLAN } from './Pricing';
 
 const PLAN_OPTIONS = [
-  { value: 'Basic', name: 'Basic', tag: '당일 운영 시작형' },
-  { value: 'Pro', name: 'Pro', tag: '운영 자동화형', recommended: true },
-  { value: 'Expert', name: 'Expert', tag: '일당·직접지급 전문형' },
+  { value: 'Basic', name: 'Basic', tag: '통합 인력 관리' },
+  { value: 'Pro', name: 'Pro', tag: 'Basic 기능 포함', recommended: true },
+  { value: ADD_ON_PLAN, name: '추가 문의', tag: '추천 근로자 제공' },
 ] as const;
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
@@ -15,6 +16,17 @@ export default function Contact() {
   const [status, setStatus] = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState<string>('');
   const [plan, setPlan] = useState<string>('');
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<string>).detail;
+      if (detail) setPlan(detail);
+    };
+    window.addEventListener('gada:select-plan', handler);
+    return () => window.removeEventListener('gada:select-plan', handler);
+  }, []);
+
+  const isAddOn = plan === ADD_ON_PLAN;
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -73,8 +85,8 @@ export default function Contact() {
           </h2>
           <p className="mt-4 text-base text-slate-600">
             담당자가 확인 후 요금제, 결제, 계정 발급 절차를 안내드립니다.
-            <br className="hidden sm:inline" /> 초기 도입 상담에서는 현재 운영 방식에 맞는 등급을
-            함께 추천드립니다.
+            <br className="hidden sm:inline" /> 추천 근로자 제공(추가 문의)을 선택하시면 별도
+            사용계약과 정산 구조를 함께 안내드립니다.
           </p>
         </div>
 
@@ -135,6 +147,15 @@ export default function Contact() {
 
               <PlanSelector value={plan} onChange={setPlan} />
 
+              {isAddOn && (
+                <p className="rounded-lg border border-[#FFC72C]/50 bg-[#FFC72C]/10 px-3.5 py-3 text-xs leading-relaxed text-slate-700">
+                  <span className="font-bold">추천 근로자 제공</span>은 별도 사용계약이 필요한
+                  서비스입니다. 가다 플랫폼 추천 근로자가 현장에 투입되면 발생 수익을 인력사무소와
+                  가다가 <span className="font-bold">5:5</span>로 나눕니다. 문의 주시면 담당자가
+                  사용계약과 정산 구조를 안내드립니다.
+                </p>
+              )}
+
               <div>
                 <label
                   htmlFor="message"
@@ -146,7 +167,11 @@ export default function Contact() {
                   id="message"
                   name="message"
                   rows={5}
-                  placeholder="현재 운영 방식, 도입 일정 등을 자유롭게 작성해주세요."
+                  placeholder={
+                    isAddOn
+                      ? '추천 근로자 제공 관련 문의 내용, 현재 운영 규모 등을 자유롭게 작성해주세요.'
+                      : '현재 운영 방식, 도입 일정 등을 자유롭게 작성해주세요.'
+                  }
                   className="w-full rounded-lg border border-slate-200 bg-white px-3.5 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#0669F7] focus:outline-none focus:ring-2 focus:ring-[#0669F7]/20"
                 />
               </div>
@@ -162,7 +187,9 @@ export default function Contact() {
                 ? '전송 중...'
                 : success
                   ? '요청이 접수되었습니다'
-                  : '회원가입 요청하기'}
+                  : isAddOn
+                    ? '추가 문의 보내기'
+                    : '회원가입 요청하기'}
             </button>
 
             {status === 'success' && (

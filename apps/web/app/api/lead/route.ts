@@ -96,7 +96,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'mail_not_configured' }, { status: 500 });
   }
 
-  const subject = `[가다 데스크] ${company} - ${manager} - ${plan} 도입 문의`;
+  const isAddOn = plan.includes('추가 문의') || plan.includes('추천 근로자');
+  const subject = isAddOn
+    ? `[가다 데스크] ${company} - ${manager} - 추가 문의 (추천 근로자 제공)`
+    : `[가다 데스크] ${company} - ${manager} - ${plan} 도입 문의`;
 
   const html = `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Helvetica Neue',sans-serif;color:#111827;line-height:1.6;padding:24px;background:#f8fafc;">

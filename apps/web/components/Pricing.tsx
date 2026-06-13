@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Check, Sparkles, Gift } from 'lucide-react';
+import { Check, Sparkles, Gift, Users, ArrowRight } from 'lucide-react';
 
 type Plan = {
-  key: 'basic' | 'pro' | 'expert';
+  key: 'basic' | 'pro';
   badge: string;
   name: string;
   monthly: number;
@@ -17,53 +17,43 @@ type Plan = {
 const plans: Plan[] = [
   {
     key: 'basic',
-    badge: '당일 운영 시작형',
+    badge: '통합 인력 관리',
     name: 'Basic',
-    monthly: 11900,
-    yearly: 9900,
-    desc: '당일 인력 배치와 출역 관리를 중심으로 인력사무소의 기본 업무를 디지털화합니다.',
+    monthly: 31900,
+    yearly: 29900,
+    desc: '현장과 공고, 출역과 마감까지 인력사무소의 일상 운영을 한 곳에서 통합 관리합니다.',
     features: [
-      '당일 인력 배치',
-      '고정 인력 관리',
-      '바로 배치할 인력 찾기',
-      '출역 현황 확인',
-      '현장 마감 체크',
+      '현장 관리',
+      '일용직 공고 관리',
+      '상용직 공고 관리',
+      '일간 출역 일보',
+      '현장 마감 현황',
     ],
   },
   {
     key: 'pro',
-    badge: '운영 자동화형',
+    badge: 'Basic 기능 포함',
     name: 'Pro',
-    monthly: 31900,
-    yearly: 29900,
-    desc: '인력 자동 배치와 반장·현장·일당 지급까지 운영을 체계적으로 자동화합니다.',
+    monthly: 61900,
+    yearly: 59900,
+    desc: '위험 현장과 기능공 팀 정보, 일당 지급 내역까지 운영을 한층 더 깊이 들여다봅니다.',
     recommended: true,
     features: [
-      'Basic 전체 기능 포함',
-      '인력 자동 배치',
-      '인력 모집 알림 발송',
-      '반장 / 팀 관리',
-      '자주 가는 현장 관리',
-      '근처 현장 보기',
-      '일당 지급 관리',
-    ],
-  },
-  {
-    key: 'expert',
-    badge: '일당·직접지급 전문형',
-    name: 'Expert',
-    monthly: 51900,
-    yearly: 49900,
-    desc: '인력 배치 대행과 일당 지급/청구 대행, 직접지급시스템까지 금융 운영 영역을 확장합니다.',
-    features: [
-      'Pro 전체 기능 포함',
-      '인력 배치 대행',
-      '일당 지급 / 청구 대행',
-      '일당 직접지급시스템 적용',
-      '사용량 및 지급 규모별 추가 과금',
+      'Basic 기능 포함',
+      '위험 현장 정보',
+      '기능공 팀 정보',
+      '월별 일당 지급 내역',
+      '현장별 일당 지급 내역',
     ],
   },
 ];
+
+export const ADD_ON_PLAN = '추가 문의 (추천 근로자)';
+
+function selectPlan(name: string) {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(new CustomEvent('gada:select-plan', { detail: name }));
+}
 
 export default function Pricing() {
   const [period, setPeriod] = useState<'monthly' | 'yearly'>('monthly');
@@ -126,7 +116,7 @@ export default function Pricing() {
           </div>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 items-start gap-6 lg:grid-cols-3">
+        <div className="mx-auto mt-12 grid max-w-3xl grid-cols-1 items-start gap-6 sm:grid-cols-2">
           {plans.map((plan) => {
             const price = period === 'monthly' ? plan.monthly : plan.yearly;
             const isPro = !!plan.recommended;
@@ -170,6 +160,7 @@ export default function Pricing() {
 
                 <a
                   href="#contact"
+                  onClick={() => selectPlan(plan.name)}
                   className={`mt-6 inline-flex items-center justify-center rounded-lg px-4 py-3 text-sm font-semibold transition ${
                     isPro
                       ? 'bg-[#0669F7] text-white hover:bg-[#0556d6]'
@@ -196,6 +187,49 @@ export default function Pricing() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mx-auto mt-6 max-w-3xl overflow-hidden rounded-2xl border border-[#FFC72C]/50 bg-gradient-to-br from-slate-900 to-slate-800 p-7 text-white md:p-9">
+          <div className="flex flex-col gap-7 md:flex-row md:items-center md:justify-between">
+            <div className="md:max-w-xl">
+              <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-[#FFC72C] px-2.5 py-1 text-xs font-bold text-slate-900">
+                <Users size={12} aria-hidden /> 추가 문의 · 추천 근로자 제공
+              </span>
+              <h3 className="mt-4 text-2xl font-bold">추천 근로자로 매출을 한 단계 더</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                가다 플랫폼이 추천하는 검증된 근로자를 직접 확인하고 현장에 투입해 인력사무소의
+                매출을 키울 수 있습니다. 추천 근로자가 현장에 투입되면, 발생한 수익을 인력사무소와
+                가다가 <span className="font-bold text-[#FFC72C]">5:5</span>로 나눕니다.
+              </p>
+              <ul className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                {[
+                  '가다 플랫폼 추천 근로자 열람',
+                  '추천 근로자 현장 투입',
+                  '투입 수익 인력사무소와 5:5 분배',
+                  '별도 사용계약 후 이용',
+                ].map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-sm text-slate-200">
+                    <Check size={16} aria-hidden className="mt-0.5 flex-shrink-0 text-[#FFC72C]" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-col items-stretch gap-2 md:w-56 md:flex-shrink-0">
+              <span className="text-sm font-medium text-slate-400">별도 사용계약 필요</span>
+              <a
+                href="#contact"
+                onClick={() => selectPlan(ADD_ON_PLAN)}
+                className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-[#FFC72C] px-4 py-3 text-sm font-bold text-slate-900 transition hover:bg-[#f0bd24]"
+              >
+                추가 문의하기 <ArrowRight size={16} aria-hidden />
+              </a>
+              <p className="text-xs leading-relaxed text-slate-400">
+                문의 주시면 담당자가 사용계약과 정산 구조를 안내드립니다.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

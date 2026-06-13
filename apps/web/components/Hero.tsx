@@ -10,6 +10,8 @@ import {
   CheckCircle2,
   Clock,
   Megaphone,
+  Gift,
+  BadgeCheck,
 } from 'lucide-react';
 
 type Stats = { attendance: number; sites: number; applicants: number };
@@ -188,10 +190,22 @@ export default function Hero() {
           </h1>
 
           <p className="mt-5 text-base leading-relaxed text-slate-600 md:text-lg">
-            당일 인력 배치, 출역 관리, 현장 마감, 일당 지급, 직접지급시스템까지.
+            현장 관리, 공고, 출역, 마감, 일당 지급까지 한 화면에서.
             <br />
             인력사무소의 반복 업무를 줄이고 현장 운영 데이터를 한눈에 확인하세요.
           </p>
+
+          <div className="mt-5 flex flex-wrap gap-2">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1.5 text-xs font-semibold text-[#0669F7]">
+              <Gift size={13} aria-hidden /> 가다 오피스 기능 무료
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FFC72C]/20 px-3 py-1.5 text-xs font-semibold text-amber-800">
+              <Megaphone size={13} aria-hidden /> 가다 앱 공고 자동 등록
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
+              <BadgeCheck size={13} aria-hidden /> 출역해도 수수료 0원
+            </span>
+          </div>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
             <a
