@@ -5,10 +5,10 @@ import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
 
 const NAV = [
-  { label: '서비스', href: '#service' },
   { label: '기능', href: '#features' },
   { label: '상생', href: '#ecosystem' },
   { label: '요금제', href: '#pricing' },
+  { label: '도입 절차', href: '#service' },
   { label: '도입문의', href: '#contact' },
 ];
 
