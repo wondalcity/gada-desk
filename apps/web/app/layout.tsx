@@ -1,10 +1,17 @@
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
+import { Noto_Sans_KR } from 'next/font/google';
 import Script from 'next/script';
 
 const GA_ID = 'G-HBKFWZPB9D';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://desk.1gada.com';
+
+const notoSansKr = Noto_Sans_KR({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  variable: '--font-noto-sans-kr',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -168,7 +175,7 @@ const softwareJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className="scroll-smooth">
       <head>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
@@ -183,7 +190,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
       </head>
-      <body className="bg-white text-slate-900 antialiased">
+      <body className={`${notoSansKr.variable} font-sans bg-white antialiased`}>
         {children}
         <script
           type="application/ld+json"

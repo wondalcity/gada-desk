@@ -1,0 +1,136 @@
+"use client";
+
+import { useState, type FormEvent } from "react";
+import Reveal from "@/components/Reveal";
+
+/** 최종 CTA + 무료 체험 신청 폼 (Figma 88:2220) */
+export default function FinalSection() {
+  const [form, setForm] = useState({ office: "", manager: "", phone: "" });
+  const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!form.office.trim() || !form.manager.trim() || !form.phone.trim()) {
+      setError("모든 항목을 입력해 주세요.");
+      return;
+    }
+    if (!/^[0-9\-+() ]{9,}$/.test(form.phone.trim())) {
+      setError("연락처 형식을 확인해 주세요.");
+      return;
+    }
+    setError(null);
+    setSending(true);
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          company: form.office.trim(),
+          manager: form.manager.trim(),
+          phone: form.phone.trim(),
+        }),
+      });
+      if (!res.ok) throw new Error("send_failed");
+      setSubmitted(true);
+    } catch {
+      setError("접수에 실패했습니다. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      setSending(false);
+    }
+  };
+
+  return (
+    <section id="final-cta" className="relative overflow-hidden py-24 lg:py-32">
+      <div
+        className="absolute inset-0"
+        aria-hidden
+        style={{ background: "radial-gradient(50% 60% at 50% 50%, #12203c 0%, #0c1322 100%)" }}
+      />
+      <div
+        className="pointer-events-none absolute right-[-10%] top-[-78px] h-[419px] w-[60%] rounded-full bg-primary opacity-25 blur-[130px]"
+        aria-hidden
+      />
+
+      <div className="relative mx-auto flex max-w-[1200px] flex-col items-center px-5">
+        <Reveal>
+          <div className="flex flex-col items-center gap-4 text-center">
+            <h2 className="text-[26px] font-bold leading-tight text-white lg:text-[40px] lg:leading-[52px]">
+              지금 가입하고{" "}
+              <span className="bg-gradient-to-r from-[#8cc800] to-[#3186ff] bg-clip-text text-transparent">
+                무료로 사용
+              </span>
+              해 보세요
+            </h2>
+            <p className="text-[15px] leading-relaxed text-[#9ba6bc] lg:text-[17px]">
+              담당자가 확인 후 계정 발급 절차를 안내드립니다.
+            </p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={150} className="w-full max-w-[540px]">
+          <div className="mt-[52px] w-full rounded-[24px] border border-[#eaecf0] bg-white p-6 drop-shadow-[0_30px_35px_rgba(16,24,40,0.28)] lg:p-[35px]">
+            {submitted ? (
+              <div className="flex flex-col items-center gap-3 py-8 text-center">
+                <span className="flex size-12 items-center justify-center rounded-full bg-[#e8f8e9] text-[24px]" aria-hidden>
+                  ✓
+                </span>
+                <p className="text-[18px] font-bold text-[#16181d]">신청이 접수되었습니다</p>
+                <p className="text-[14px] leading-relaxed text-[#6b7280]">
+                  담당자가 확인 후 {form.phone} 으로
+                  <br />
+                  계정 발급 절차를 안내드리겠습니다.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3">
+                <input
+                  type="text"
+                  placeholder="인력사무소명"
+                  value={form.office}
+                  onChange={(e) => setForm((f) => ({ ...f, office: e.target.value }))}
+                  className="h-[54px] w-full rounded-[12px] border border-[#eaecf0] px-5 text-[15px] text-[#16181d] outline-none transition-colors placeholder:text-[#16181d]/50 focus:border-primary"
+                />
+                <input
+                  type="text"
+                  placeholder="담당자명"
+                  value={form.manager}
+                  onChange={(e) => setForm((f) => ({ ...f, manager: e.target.value }))}
+                  className="h-[54px] w-full rounded-[12px] border border-[#eaecf0] px-5 text-[15px] text-[#16181d] outline-none transition-colors placeholder:text-[#16181d]/50 focus:border-primary"
+                />
+                <input
+                  type="tel"
+                  placeholder="연락처"
+                  value={form.phone}
+                  onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                  className="h-[54px] w-full rounded-[12px] border border-[#eaecf0] px-5 text-[15px] text-[#16181d] outline-none transition-colors placeholder:text-[#16181d]/50 focus:border-primary"
+                />
+                {error && <p className="text-[13px] font-medium text-red-500">{error}</p>}
+                <div className="flex flex-col gap-2.5 pt-1 sm:flex-row">
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="h-14 flex-1 rounded-full bg-primary text-[16px] font-bold text-white drop-shadow-[0_10px_12px_rgba(6,105,247,0.5)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {sending ? "접수 중..." : "무료 체험하기"}
+                  </button>
+                  <a
+                    href="https://www.worksmate.co.kr"
+                    className="flex h-14 flex-1 items-center justify-center rounded-full border border-[#eaecf0] bg-white text-[16px] font-bold text-[#16181d] transition-colors hover:bg-[#f7f9fc]"
+                  >
+                    소개자료 다운받기
+                  </a>
+                </div>
+              </form>
+            )}
+          </div>
+        </Reveal>
+
+        <p className="relative pt-5 text-center text-[13.5px] leading-relaxed text-[#6b7280]">
+          개인정보 수집 동의 문구는 실 운영 시 추가됩니다.
+        </p>
+      </div>
+    </section>
+  );
+}

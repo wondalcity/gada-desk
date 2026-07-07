@@ -18,19 +18,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/#pricing`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${SITE_URL}/#service`,
+      url: `${SITE_URL}/#process`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
-      url: `${SITE_URL}/#contact`,
+      url: `${SITE_URL}/#faq`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/#final-cta`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.8,

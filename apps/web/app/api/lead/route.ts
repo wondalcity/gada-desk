@@ -77,12 +77,13 @@ export async function POST(req: Request) {
 
   const company = body.company?.trim();
   const manager = body.manager?.trim();
-  const address = body.address?.trim();
+  const address = body.address?.trim() ?? '';
   const phone = body.phone?.trim();
-  const plan = body.plan?.trim();
+  const plan = body.plan?.trim() ?? '';
   const message = body.message?.trim() ?? '';
 
-  if (!company || !manager || !address || !phone || !plan) {
+  // 리뉴얼 폼은 사무소명·담당자명·연락처만 받음 — 주소·요금제는 선택 항목
+  if (!company || !manager || !phone) {
     return NextResponse.json({ error: 'missing_fields' }, { status: 400 });
   }
 
@@ -99,22 +100,24 @@ export async function POST(req: Request) {
   const isAddOn = plan.includes('추가 문의') || plan.includes('추천 근로자');
   const subject = isAddOn
     ? `[가다 데스크] ${company} - ${manager} - 추가 문의 (추천 근로자 제공)`
-    : `[가다 데스크] ${company} - ${manager} - ${plan} 도입 문의`;
+    : plan
+      ? `[가다 데스크] ${company} - ${manager} - ${plan} 도입 문의`
+      : `[가다 데스크] ${company} - ${manager} - 무료 체험 신청`;
 
   const html = `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Pretendard','Helvetica Neue',sans-serif;color:#111827;line-height:1.6;padding:24px;background:#f8fafc;">
       <div style="max-width:560px;margin:0 auto;background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
         <div style="background:#0669F7;color:#fff;padding:18px 24px;">
           <div style="font-size:13px;opacity:.85;letter-spacing:.02em;">GADA Desk · 회원가입 요청</div>
-          <div style="font-size:18px;font-weight:700;margin-top:2px;">${escapeHtml(company)} - ${escapeHtml(plan)}</div>
+          <div style="font-size:18px;font-weight:700;margin-top:2px;">${escapeHtml(company)} - ${escapeHtml(plan || '무료 체험 신청')}</div>
         </div>
         <table style="width:100%;border-collapse:collapse;">
           <tbody>
             ${row('인력사무소명', company)}
             ${row('담당자명', manager)}
-            ${row('인력사무소 주소', address)}
+            ${row('인력사무소 주소', address || '(미입력)')}
             ${row('연락처', phone)}
-            ${row('희망 요금제', plan)}
+            ${row('희망 요금제', plan || '(미입력)')}
             ${row('문의 내용', message ? message.replace(/\n/g, '<br/>') : '(없음)', true)}
           </tbody>
         </table>
@@ -131,9 +134,9 @@ export async function POST(req: Request) {
     `${divider}\n\n` +
     `인력사무소명: ${company}\n` +
     `담당자명: ${manager}\n` +
-    `인력사무소 주소: ${address}\n` +
+    `인력사무소 주소: ${address || '(미입력)'}\n` +
     `연락처: ${phone}\n` +
-    `희망 요금제: ${plan}\n\n` +
+    `희망 요금제: ${plan || '(미입력)'}\n\n` +
     `문의 내용:\n${message || '(없음)'}\n\n` +
     `${divider}\n` +
     `가다 데스크 랜딩 페이지에서 자동 발송됨\n`;
