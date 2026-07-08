@@ -92,17 +92,6 @@ const statCards = [
   },
 ];
 
-/**
- * 스크린샷 위 데이터 마스킹 바 — 실제 현장명·파트너명을 가리는 스켈레톤.
- * 원본 프레임(891×502) 기준 좌표를 %로 환산해 어떤 크기에서도 같은 위치를 가린다.
- */
-const MASK_ROW_TOPS = [305.28, 331.92, 358.55, 385.19, 411.83, 438.46, 465.1, 491.73];
-const MASK_RIGHT_TOPS = [310.41, 336.02, 362.65, 390.31, 415.92, 438.48, 466.14, 491.75];
-const FRAME_W = 891;
-const FRAME_H = 502;
-const pctX = (px: number) => `${((px / FRAME_W) * 100).toFixed(2)}%`;
-const pctY = (px: number) => `${((px / FRAME_H) * 100).toFixed(2)}%`;
-
 /** 히어로 — 그라데이션 배경 + 카피 + CTA + 떠다니는 대시보드 (Figma 88:156) */
 export default function Hero() {
   return (
@@ -218,61 +207,6 @@ export default function Hero() {
                 alt="가다데스크 관리자 대시보드 — 현장 유지 현황과 출역 인원을 한 화면에서 관리"
                 className="block w-full"
               />
-
-              {/* 현장명 컬럼 마스킹 스켈레톤 */}
-              {MASK_ROW_TOPS.map((top, i) => (
-                <div key={`mask-l-${i}`} aria-hidden>
-                  <div
-                    className="absolute rounded-[2px] bg-[#e9e9e9]"
-                    style={{
-                      left: pctX(211.03),
-                      top: pctY(top),
-                      width: pctX(113.71),
-                      height: pctY(8.2),
-                    }}
-                  />
-                  <div
-                    className="absolute rounded-[2px] bg-[#e9e9e9]"
-                    style={{
-                      left: pctX(201.81),
-                      top: pctY(top + 10.25),
-                      width: pctX(113.71),
-                      height: pctY(8.2),
-                    }}
-                  />
-                </div>
-              ))}
-
-              {/* 우측 파트너 컬럼 마스킹 스켈레톤 */}
-              {MASK_RIGHT_TOPS.map((top, i) => (
-                <div
-                  key={`mask-r-${i}`}
-                  className="absolute rounded-[2px] bg-[#e9e9e9]"
-                  aria-hidden
-                  style={{
-                    right: pctX(-19.46),
-                    top: pctY(top),
-                    width: pctX(38.93),
-                    height: pctY(8.2),
-                  }}
-                />
-              ))}
-
-              {/* 상단 사용자명 마스킹 */}
-              <div
-                className="absolute flex items-center justify-center bg-white"
-                aria-hidden
-                style={{
-                  right: pctX(13),
-                  top: pctY(1),
-                  width: pctX(52),
-                  height: pctY(24),
-                }}
-              >
-                <span className="text-[7px] leading-none text-[#1c1c1c] md:text-[9px]">
-                  관리자
-                </span>
-              </div>
             </div>
           </div>
 
