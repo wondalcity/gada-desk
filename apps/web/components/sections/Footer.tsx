@@ -36,9 +36,9 @@ export default function Footer() {
     <footer className="bg-white px-5 py-14 lg:px-10 lg:py-[70px]">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-14 lg:gap-[70px]">
         <div className="flex flex-col justify-between gap-12 lg:flex-row lg:items-start">
-          <div className="flex items-center gap-2">
-            <img src="/assets/footer-logo-icon.svg" alt="가다" className="h-[41px] w-[87px]" />
-            <img src="/assets/footer-logo-text.svg" alt="데스크" className="h-[24px] w-[51px]" />
+          <div className="flex items-end gap-2">
+            <img src="/assets/footer-logo-icon.svg" alt="가다" className="h-[41px] w-auto" />
+            <img src="/assets/footer-logo-text.svg" alt="데스크" className="h-[24px] w-auto" />
           </div>
           <div className="flex flex-wrap gap-12 text-[#7a7b7a] lg:gap-[60px]">
             {LINK_COLUMNS.map((col) => (

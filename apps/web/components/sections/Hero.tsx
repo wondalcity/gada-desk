@@ -200,7 +200,8 @@ export default function Hero() {
               무료 체험하기
             </a>
             <a
-              href="#final-cta"
+              href="/docs/gada-desk-intro-v1.0.pdf"
+              download="가다 데스크 서비스 소개서 ver 1.0.pdf"
               className="inline-flex h-[60px] min-w-[180px] items-center justify-center rounded-full border-2 border-white/45 bg-white/[0.08] px-8 text-[18px] font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-white/20"
             >
               소개자료 다운받기

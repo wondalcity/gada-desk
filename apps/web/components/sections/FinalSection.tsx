@@ -116,7 +116,8 @@ export default function FinalSection() {
                     {sending ? "접수 중..." : "무료 체험하기"}
                   </button>
                   <a
-                    href="https://www.worksmate.co.kr"
+                    href="/docs/gada-desk-intro-v1.0.pdf"
+                    download="가다 데스크 서비스 소개서 ver 1.0.pdf"
                     className="flex h-14 flex-1 items-center justify-center rounded-full border border-[#eaecf0] bg-white text-[16px] font-bold text-[#16181d] transition-colors hover:bg-[#f7f9fc]"
                   >
                     소개자료 다운받기

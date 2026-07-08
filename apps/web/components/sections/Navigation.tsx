@@ -28,9 +28,10 @@ export default function Navigation() {
     >
       <div className="mx-auto flex h-[60px] w-full max-w-[1280px] items-center justify-between px-5 lg:px-10">
         <div className="flex items-center">
-          <a href="#top" className="flex items-center gap-[6px] px-1 py-3">
-            <img src="/assets/logo-icon.svg" alt="가다" className="h-[30px] w-[64px]" />
-            <img src="/assets/logo-text.svg" alt="데스크" className="h-[17px] w-[37px]" />
+          {/* Figma 원본은 '데스크' 텍스트가 마크와 하단 정렬 (88:128) */}
+          <a href="#top" className="flex items-end gap-[6px] px-1 py-3">
+            <img src="/assets/logo-icon.svg" alt="가다" className="h-[30px] w-auto" />
+            <img src="/assets/logo-text.svg" alt="데스크" className="h-[17px] w-auto" />
           </a>
           <nav className="ml-4 hidden items-center lg:flex">
             {NAV_ITEMS.map((item) => (
