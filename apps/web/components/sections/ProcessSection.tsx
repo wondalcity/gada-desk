@@ -59,8 +59,10 @@ export default function ProcessSection() {
             )}
             <Reveal delay={i * 150} className="w-full flex-1">
               <div
-                className={`relative flex h-[260px] flex-col gap-8 overflow-hidden rounded-[24px] bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(16,24,40,0.1)] ${
-                  step.accent ? "border-2 border-[#00c800]" : "border border-black/10"
+                className={`relative flex h-[260px] flex-col gap-8 overflow-hidden rounded-[24px] p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(16,24,40,0.1)] ${
+                  step.accent
+                    ? "border-2 border-transparent [background:linear-gradient(#fff,#fff)_padding-box,linear-gradient(108deg,#00c800_3.5%,#0669f7_82%)_border-box]"
+                    : "border border-black/10 bg-white"
                 }`}
               >
                 <div className="flex flex-col gap-3">

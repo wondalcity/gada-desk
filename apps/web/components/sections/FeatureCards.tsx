@@ -119,7 +119,7 @@ function WorkerHistoryVisual() {
         className="absolute left-1/2 top-[186px] h-[266px] w-[288px] max-w-none -translate-x-1/2 rounded-[10px] border border-[#cfcfcf] object-cover opacity-60"
       />
       {/* 출역 상세 카드 */}
-      <div className="absolute left-[198px] top-[151px] h-[176px] w-[103px] rounded-[10px] bg-[linear-gradient(108deg,#00c800_3.5%,#0669f7_82%)] p-[2px]">
+      <div className="absolute left-[198px] top-[151px] h-[176px] w-[103px] rounded-[10px] bg-[linear-gradient(108deg,#00c800_3.5%,#0669f7_82%)] p-[2px] shadow-[15px_20px_20px_0_rgba(0,0,0,0.1)]">
         <div className="size-full rounded-[8px] bg-white px-[9px] py-[10px]">
           <div className="flex items-start justify-between">
             <p className="text-[11px] font-medium leading-[14px] text-[#25282a]">
