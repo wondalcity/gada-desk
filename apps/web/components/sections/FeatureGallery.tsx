@@ -20,25 +20,41 @@ const TABS: Tab[] = [
     title: "근로자 관리 및 인력 배치",
     description:
       "우리 사무소 근로자의 출역 이력과 프로필을 한곳에서 관리합니다. 경력·자격·연락처는 물론 어느 현장에 며칠 나갔는지까지 기록돼, 필요한 인력을 빠르게 찾아 배치할 수 있습니다. 가다의 추천 근로자도 확인할 수 있어요.",
-    images: [{ src: "/assets/gallery-slide1.png", caption: "가다 추천 근로자 제공" }],
+    images: [
+      { src: "/assets/gallery/worker-detail.png", caption: "근로자 상세정보" },
+      { src: "/assets/gallery/worker-monthly.png", caption: "근로자 월별 근로 이력" },
+      { src: "/assets/gallery/worker-team.png", caption: "기능공 팀 정보" },
+    ],
   },
   {
     title: "현장 대응 및 출역 관리",
     description:
       "현장별 출역 현황을 실시간으로 확인하고, 갑작스러운 현장 요청에도 빠르게 대응합니다. 출역 기록이 자동으로 쌓여 정산까지 이어집니다.",
-    images: [{ src: "/assets/gallery-slide1.png", caption: "현장별 출역 현황" }],
+    images: [
+      { src: "/assets/gallery/site-register.png", caption: "현장 등록" },
+      { src: "/assets/gallery/site-list.png", caption: "현장 리스트" },
+      { src: "/assets/gallery/site-detail.png", caption: "현장 정보 상세" },
+    ],
   },
   {
     title: "작업 등록 및 공고·매칭",
     description:
       "작업을 등록하면 공고 게시와 근로자 매칭까지 한 번에 진행됩니다. 조건에 맞는 근로자를 빠르게 연결하세요.",
-    images: [{ src: "/assets/gallery-slide1.png", caption: "공고·매칭 현황" }],
+    images: [
+      { src: "/assets/gallery/job-register.png", caption: "신규 작업 등록" },
+      { src: "/assets/gallery/job-closing.png", caption: "현장 마감 현황" },
+      { src: "/assets/gallery/job-daily.png", caption: "일간 출역 현황" },
+    ],
   },
   {
     title: "지급 관리 및 내역 다운로드",
     description:
       "일자별·현장별 지급 내역을 자동으로 정리하고, 필요한 서식으로 엑셀·PDF 다운로드까지 지원합니다.",
-    images: [{ src: "/assets/gallery-slide1.png", caption: "지급 내역 관리" }],
+    images: [
+      { src: "/assets/gallery/pay-daily-close.png", caption: "일일 마감 확인하기" },
+      { src: "/assets/gallery/pay-site.png", caption: "현장별 지급 내역" },
+      { src: "/assets/gallery/pay-monthly.png", caption: "월별 지급 내역" },
+    ],
   },
 ];
 
@@ -95,12 +111,15 @@ export default function FeatureGallery() {
             <p className="absolute left-1/2 top-6 z-10 -translate-x-1/2 whitespace-nowrap text-[16px] font-bold text-white lg:top-[34px] lg:text-[20px]">
               {images[activeImg].caption}
             </p>
-            <img
-              key={`${activeTab}-${activeImg}`}
-              src={images[activeImg].src}
-              alt={`${TABS[activeTab].title} — ${images[activeImg].caption}`}
-              className="absolute bottom-[-8%] left-1/2 w-[73%] -translate-x-1/2 animate-[slideIn_0.5s_ease-out] rounded-[10px] shadow-[15px_20px_20px_rgba(0,0,0,0.1)]"
-            />
+            {/* 이미지 비율이 제각각이라 중앙 정렬 + contain으로 표시 */}
+            <div className="absolute inset-0 flex items-center justify-center px-20 pb-12 pt-16 lg:px-28 lg:pt-20">
+              <img
+                key={`${activeTab}-${activeImg}`}
+                src={images[activeImg].src}
+                alt={`${TABS[activeTab].title} — ${images[activeImg].caption}`}
+                className="max-h-full max-w-full animate-[galleryFade_0.5s_ease-out] rounded-[10px] shadow-[15px_20px_20px_rgba(0,0,0,0.25)]"
+              />
+            </div>
 
             <button
               type="button"
