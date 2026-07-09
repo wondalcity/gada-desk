@@ -139,14 +139,14 @@ export default function FinalSection() {
                   <button
                     type="submit"
                     disabled={sending}
-                    className="h-14 flex-1 rounded-full bg-primary text-[16px] font-bold text-white drop-shadow-[0_10px_12px_rgba(6,105,247,0.5)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="h-14 shrink-0 rounded-full bg-primary text-[16px] font-bold text-white drop-shadow-[0_10px_12px_rgba(6,105,247,0.5)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60 sm:flex-1"
                   >
                     {sending ? "접수 중..." : "무료 체험하기"}
                   </button>
                   <a
                     href="/docs/gada-desk-intro-v1.0.pdf"
                     download="가다 데스크 서비스 소개서 ver 1.0.pdf"
-                    className="flex h-14 flex-1 items-center justify-center rounded-full border border-[#eaecf0] bg-white text-[16px] font-bold text-[#16181d] transition-colors hover:bg-[#f7f9fc]"
+                    className="flex h-14 shrink-0 items-center justify-center rounded-full border border-[#eaecf0] bg-white text-[16px] font-bold text-[#16181d] transition-colors hover:bg-[#f7f9fc] sm:flex-1"
                   >
                     소개자료 다운받기
                   </a>

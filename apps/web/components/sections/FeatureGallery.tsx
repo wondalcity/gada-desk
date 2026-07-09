@@ -107,12 +107,12 @@ export default function FeatureGallery() {
           onMouseLeave={() => setPaused(false)}
         >
           {/* 슬라이드 패널 */}
-          <div className="relative aspect-[824/464] w-full overflow-hidden rounded-[20px] bg-gradient-to-br from-[#0d3688] to-[#12203c] lg:w-[824px] lg:shrink-0">
+          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[20px] bg-gradient-to-br from-[#0d3688] to-[#12203c] lg:aspect-[824/464] lg:w-[824px] lg:shrink-0">
             <p className="absolute left-1/2 top-6 z-10 -translate-x-1/2 whitespace-nowrap text-[16px] font-bold text-white lg:top-[34px] lg:text-[20px]">
               {images[activeImg].caption}
             </p>
             {/* 이미지 비율이 제각각이라 중앙 정렬 + contain으로 표시 */}
-            <div className="absolute inset-0 flex items-center justify-center px-20 pb-12 pt-16 lg:px-28 lg:pt-20">
+            <div className="absolute inset-0 flex items-center justify-center px-10 pb-10 pt-14 lg:px-28 lg:pb-12 lg:pt-20">
               <img
                 key={`${activeTab}-${activeImg}`}
                 src={images[activeImg].src}
