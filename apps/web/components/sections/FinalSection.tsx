@@ -6,6 +6,7 @@ import Reveal from "@/components/Reveal";
 /** 최종 CTA + 무료 체험 신청 폼 (Figma 88:2220) */
 export default function FinalSection() {
   const [form, setForm] = useState({ office: "", manager: "", phone: "" });
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -18,6 +19,10 @@ export default function FinalSection() {
     }
     if (!/^[0-9\-+() ]{9,}$/.test(form.phone.trim())) {
       setError("연락처 형식을 확인해 주세요.");
+      return;
+    }
+    if (!agreed) {
+      setError("개인정보 수집·이용에 동의해 주세요.");
       return;
     }
     setError(null);
@@ -106,6 +111,29 @@ export default function FinalSection() {
                   onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                   className="h-[54px] w-full rounded-[12px] border border-[#eaecf0] px-5 text-[15px] text-[#16181d] outline-none transition-colors placeholder:text-[#16181d]/50 focus:border-primary"
                 />
+                <div className="flex flex-col gap-2 rounded-[12px] bg-[#f7f9fc] px-4 py-3">
+                  <label className="flex cursor-pointer items-center gap-2 text-[13.5px] font-medium text-[#16181d]">
+                    <input
+                      type="checkbox"
+                      checked={agreed}
+                      onChange={(e) => setAgreed(e.target.checked)}
+                      className="size-4 shrink-0 accent-primary"
+                    />
+                    [필수] 개인정보 수집·이용에 동의합니다
+                  </label>
+                  <details className="text-[12px] leading-relaxed text-[#6b7280]">
+                    <summary className="cursor-pointer select-none">자세히 보기</summary>
+                    <p className="pt-1">
+                      · 수집 항목: 인력사무소명, 담당자명, 연락처
+                      <br />
+                      · 수집 목적: 무료 체험 신청 확인 및 계정 발급 안내
+                      <br />
+                      · 보유 기간: 목적 달성 후 지체 없이 파기
+                      <br />
+                      동의를 거부할 수 있으나, 거부 시 무료 체험 신청이 제한됩니다.
+                    </p>
+                  </details>
+                </div>
                 {error && <p className="text-[13px] font-medium text-red-500">{error}</p>}
                 <div className="flex flex-col gap-2.5 pt-1 sm:flex-row">
                   <button
@@ -128,9 +156,6 @@ export default function FinalSection() {
           </div>
         </Reveal>
 
-        <p className="relative pt-5 text-center text-[13.5px] leading-relaxed text-[#6b7280]">
-          개인정보 수집 동의 문구는 실 운영 시 추가됩니다.
-        </p>
       </div>
     </section>
   );
