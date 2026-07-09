@@ -5,6 +5,8 @@ interface Step {
   title: string;
   description: string;
   image: string;
+  /** Figma 88:1257 기준 카드 내 일러스트 위치·크기 */
+  imageClass: string;
   accent?: boolean;
 }
 
@@ -14,18 +16,22 @@ const STEPS: Step[] = [
     title: "가입 요청",
     description: "인력사무소 정보와 담당자 연락처를 남깁니다.",
     image: "/assets/process-step1.png",
+    imageClass: "bottom-[24px] right-[30px] h-[112px]",
   },
   {
     no: "2",
     title: "계정 발급",
     description: "담당자 확인 후 운영 계정이 발급됩니다.",
     image: "/assets/process-step2.png",
+    // 손목 일러스트는 원본 디자인대로 카드 오른쪽 밖으로 잘려나감
+    imageClass: "bottom-[4px] right-[-64px] h-[100px]",
   },
   {
     no: "3",
     title: "무료 사용",
     description: "베타 기간 동안 전 기능을 무료로 사용합니다.",
     image: "/assets/process-step3.png",
+    imageClass: "bottom-[24px] right-[30px] h-[106px]",
     accent: true,
   },
 ];
@@ -88,7 +94,7 @@ export default function ProcessSection() {
                   src={step.image}
                   alt=""
                   aria-hidden
-                  className="pointer-events-none absolute bottom-0 right-4 max-h-[120px] w-auto"
+                  className={`pointer-events-none absolute w-auto ${step.imageClass}`}
                 />
               </div>
             </Reveal>
