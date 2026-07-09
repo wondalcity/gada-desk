@@ -23,8 +23,8 @@ const STEPS: Step[] = [
     title: "계정 발급",
     description: "담당자 확인 후 운영 계정이 발급됩니다.",
     image: "/assets/process-step2.png",
-    // 손목 일러스트는 원본 디자인대로 카드 오른쪽 밖으로 잘려나감
-    imageClass: "bottom-[4px] right-[-64px] h-[100px]",
+    // 손목 일러스트는 원본 디자인대로 카드 오른쪽 밖으로 살짝 잘려나감
+    imageClass: "bottom-[38px] right-[-8px] h-[66px]",
   },
   {
     no: "3",
