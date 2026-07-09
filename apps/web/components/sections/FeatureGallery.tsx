@@ -1,61 +1,74 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Reveal from "@/components/Reveal";
 
-interface Slide {
-  title: string;
-  description: string;
-  image: string;
+interface GalleryImage {
+  src: string;
+  caption: string;
 }
 
-const SLIDES: Slide[] = [
+interface Tab {
+  title: string;
+  description: string;
+  /** 탭 안에서 무한 롤링되는 이미지들 — 이미지 추가 시 배열에 넣기만 하면 됨 */
+  images: GalleryImage[];
+}
+
+const TABS: Tab[] = [
   {
     title: "근로자 관리 및 인력 배치",
     description:
       "우리 사무소 근로자의 출역 이력과 프로필을 한곳에서 관리합니다. 경력·자격·연락처는 물론 어느 현장에 며칠 나갔는지까지 기록돼, 필요한 인력을 빠르게 찾아 배치할 수 있습니다. 가다의 추천 근로자도 확인할 수 있어요.",
-    image: "/assets/gallery-slide1.png",
+    images: [{ src: "/assets/gallery-slide1.png", caption: "가다 추천 근로자 제공" }],
   },
   {
     title: "현장 대응 및 출역 관리",
     description:
       "현장별 출역 현황을 실시간으로 확인하고, 갑작스러운 현장 요청에도 빠르게 대응합니다. 출역 기록이 자동으로 쌓여 정산까지 이어집니다.",
-    image: "/assets/gallery-slide1.png",
+    images: [{ src: "/assets/gallery-slide1.png", caption: "현장별 출역 현황" }],
   },
   {
     title: "작업 등록 및 공고·매칭",
     description:
       "작업을 등록하면 공고 게시와 근로자 매칭까지 한 번에 진행됩니다. 조건에 맞는 근로자를 빠르게 연결하세요.",
-    image: "/assets/gallery-slide1.png",
+    images: [{ src: "/assets/gallery-slide1.png", caption: "공고·매칭 현황" }],
   },
   {
     title: "지급 관리 및 내역 다운로드",
     description:
       "일자별·현장별 지급 내역을 자동으로 정리하고, 필요한 서식으로 엑셀·PDF 다운로드까지 지원합니다.",
-    image: "/assets/gallery-slide1.png",
+    images: [{ src: "/assets/gallery-slide1.png", caption: "지급 내역 관리" }],
   },
 ];
 
-const SLIDE_CAPTIONS = ["가다 추천 근로자 제공", "현장별 출역 현황", "공고·매칭 현황", "지급 내역 관리"];
-
 export default function FeatureGallery() {
-  const [active, setActive] = useState(0);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [activeTab, setActiveTab] = useState(0);
+  const [activeImg, setActiveImg] = useState(0);
   const [paused, setPaused] = useState(false);
 
-  const go = useCallback((next: number) => {
-    setActive((next + SLIDES.length) % SLIDES.length);
+  const images = TABS[activeTab].images;
+
+  // 화살표·자동재생은 탭을 벗어나지 않고 현재 탭의 이미지만 순환
+  const goImg = useCallback(
+    (next: number) => {
+      setActiveImg((next + images.length) % images.length);
+    },
+    [images.length],
+  );
+
+  const selectTab = useCallback((i: number) => {
+    setActiveTab(i);
+    setActiveImg(0);
   }, []);
 
   useEffect(() => {
-    if (paused) return;
-    timerRef.current = setInterval(() => {
-      setActive((v) => (v + 1) % SLIDES.length);
+    if (paused || images.length < 2) return;
+    const timer = setInterval(() => {
+      setActiveImg((v) => (v + 1) % images.length);
     }, 5000);
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [paused]);
+    return () => clearInterval(timer);
+  }, [paused, activeTab, images.length]);
 
   return (
     <section className="flex flex-col items-center gap-14 bg-white pb-28 pt-24 lg:gap-20 lg:pb-40 lg:pt-32">
@@ -80,82 +93,107 @@ export default function FeatureGallery() {
           {/* 슬라이드 패널 */}
           <div className="relative aspect-[824/464] w-full overflow-hidden rounded-[20px] bg-gradient-to-br from-[#0d3688] to-[#12203c] lg:w-[824px] lg:shrink-0">
             <p className="absolute left-1/2 top-6 z-10 -translate-x-1/2 whitespace-nowrap text-[16px] font-bold text-white lg:top-[34px] lg:text-[20px]">
-              {SLIDE_CAPTIONS[active]}
+              {images[activeImg].caption}
             </p>
             <img
-              key={active}
-              src={SLIDES[active].image}
-              alt={SLIDES[active].title}
+              key={`${activeTab}-${activeImg}`}
+              src={images[activeImg].src}
+              alt={`${TABS[activeTab].title} — ${images[activeImg].caption}`}
               className="absolute bottom-[-8%] left-1/2 w-[73%] -translate-x-1/2 animate-[slideIn_0.5s_ease-out] rounded-[10px] shadow-[15px_20px_20px_rgba(0,0,0,0.1)]"
             />
 
             <button
               type="button"
-              aria-label="이전 기능"
-              onClick={() => go(active - 1)}
+              aria-label="이전 이미지"
+              onClick={() => goImg(activeImg - 1)}
               className="absolute left-4 top-1/2 z-10 flex size-[44px] -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25 lg:left-[26px] lg:size-[52px]"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-                <path d="M15 5l-7 7 7 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M15 5l-7 7 7 7"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </button>
             <button
               type="button"
-              aria-label="다음 기능"
-              onClick={() => go(active + 1)}
+              aria-label="다음 이미지"
+              onClick={() => goImg(activeImg + 1)}
               className="absolute right-4 top-1/2 z-10 flex size-[44px] -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25 lg:right-[26px] lg:size-[52px]"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-                <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M9 5l7 7-7 7"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </button>
 
             <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-start gap-2">
-              {SLIDES.map((_, i) => (
+              {images.map((_, i) => (
                 <button
                   key={i}
                   type="button"
-                  aria-label={`${i + 1}번째 기능 보기`}
-                  onClick={() => go(i)}
+                  aria-label={`${i + 1}번째 이미지 보기`}
+                  onClick={() => goImg(i)}
                   className={`h-2 rounded-full transition-all duration-300 ${
-                    i === active ? "w-6 bg-primary" : "w-2 bg-primary/50 hover:bg-primary/70"
+                    i === activeImg ? "w-6 bg-primary" : "w-2 bg-primary/50 hover:bg-primary/70"
                   }`}
                 />
               ))}
             </div>
           </div>
 
-          {/* 탭 목록 */}
+          {/* 탭 목록 — 탭 클릭 시에만 화면 전환 */}
           <div className="flex w-full flex-col gap-1 lg:min-w-0 lg:flex-1">
-            {SLIDES.map((s, i) => (
+            {TABS.map((tab, i) => (
               <div key={i}>
                 <button
                   type="button"
-                  onClick={() => go(i)}
+                  onClick={() => selectTab(i)}
                   className={`flex w-full items-center gap-3 rounded-[14px] px-4 py-3 text-left transition-colors lg:rounded-[100px] lg:px-6 ${
-                    i === active ? "bg-[#0d3688]" : "hover:bg-[#f2f6fc]"
+                    i === activeTab ? "bg-[#0d3688]" : "hover:bg-[#f2f6fc]"
                   }`}
                 >
-                  {i === active && (
-                    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" className="shrink-0" aria-hidden>
-                      <path d="M1 1l6 6-6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  {i === activeTab && (
+                    <svg
+                      width="8"
+                      height="14"
+                      viewBox="0 0 8 14"
+                      fill="none"
+                      className="shrink-0"
+                      aria-hidden
+                    >
+                      <path
+                        d="M1 1l6 6-6 6"
+                        stroke="#fff"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
                     </svg>
                   )}
                   <span
                     className={`text-[17px] font-bold leading-[25px] lg:text-[20px] ${
-                      i === active ? "text-white" : "text-[#1a202c]/40"
+                      i === activeTab ? "text-white" : "text-[#1a202c]/40"
                     }`}
                   >
-                    {s.title}
+                    {tab.title}
                   </span>
                 </button>
                 <div
                   className={`grid transition-all duration-500 ${
-                    i === active ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    i === activeTab ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                   }`}
                 >
                   <p className="overflow-hidden pl-6 pt-2 text-[15px] leading-6 text-black lg:text-[16px]">
-                    {s.description}
+                    {tab.description}
                   </p>
                 </div>
               </div>
