@@ -117,7 +117,7 @@ export default function FeatureGallery() {
                 key={`${activeTab}-${activeImg}`}
                 src={images[activeImg].src}
                 alt={`${TABS[activeTab].title} — ${images[activeImg].caption}`}
-                className="max-h-full max-w-full animate-[galleryFade_0.5s_ease-out] rounded-[10px] shadow-[15px_20px_20px_rgba(0,0,0,0.25)]"
+                className="max-h-full max-w-full animate-[galleryFade_0.5s_ease-out] rounded-[10px] drop-shadow-[0_16px_24px_rgba(0,0,0,0.35)]"
               />
             </div>
 
