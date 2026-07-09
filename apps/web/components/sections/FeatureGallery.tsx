@@ -150,8 +150,8 @@ export default function FeatureGallery() {
             </div>
           </div>
 
-          {/* 탭 목록 — 탭 클릭 시에만 화면 전환 */}
-          <div className="flex w-full flex-col gap-[36px] lg:min-w-0 lg:flex-1">
+          {/* 탭 목록 — 탭 클릭 시에만 화면 전환 (간격: Figma 88:975 기준) */}
+          <div className="flex w-full flex-col gap-1 lg:min-w-0 lg:flex-1">
             {TABS.map((tab, i) => (
               <div key={i}>
                 <button
@@ -189,10 +189,12 @@ export default function FeatureGallery() {
                 </button>
                 <div
                   className={`grid transition-all duration-500 ${
-                    i === activeTab ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    i === activeTab
+                      ? "grid-rows-[1fr] pb-5 pt-4 opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
                   }`}
                 >
-                  <p className="overflow-hidden pl-6 pt-2 text-[15px] leading-6 text-black lg:text-[16px]">
+                  <p className="overflow-hidden pl-6 text-[15px] leading-6 text-black lg:text-[16px]">
                     {tab.description}
                   </p>
                 </div>
