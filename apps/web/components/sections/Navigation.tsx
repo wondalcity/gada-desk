@@ -6,7 +6,10 @@ const NAV_ITEMS = [
   { label: "주요 기능", href: "#features" },
   { label: "도입 절차", href: "#process" },
   { label: "자주묻는 질문", href: "#faq" },
-  { label: "블로그", href: "https://blog.1gada.com" },
+  {
+    label: "블로그",
+    href: "https://blog.1gada.com/?utm_source=gada_desk&utm_medium=referral&utm_campaign=desk_landing&utm_content=gnb_blog",
+  },
 ];
 
 export default function Navigation() {
@@ -48,7 +51,7 @@ export default function Navigation() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <a
-            href="https://www.worksmate.co.kr"
+            href="https://1gada.com/?utm_source=gada_desk&utm_medium=referral&utm_campaign=desk_landing&utm_content=gnb_company"
             className="flex h-10 items-center whitespace-nowrap rounded px-4 text-[16px] font-bold text-primary transition-colors bg-primary-light hover:bg-[#d3e6ff]"
           >
             회사 소개
@@ -95,7 +98,7 @@ export default function Navigation() {
           ))}
           <div className="mt-3 flex gap-3">
             <a
-              href="https://www.worksmate.co.kr"
+              href="https://1gada.com/?utm_source=gada_desk&utm_medium=referral&utm_campaign=desk_landing&utm_content=gnb_company"
               className="flex h-10 flex-1 items-center justify-center rounded bg-primary-light text-[15px] font-bold text-primary"
             >
               회사 소개
