@@ -151,7 +151,7 @@ export default function FeatureGallery() {
           </div>
 
           {/* 탭 목록 — 탭 클릭 시에만 화면 전환 */}
-          <div className="flex w-full flex-col gap-1 lg:min-w-0 lg:flex-1">
+          <div className="flex w-full flex-col gap-[36px] lg:min-w-0 lg:flex-1">
             {TABS.map((tab, i) => (
               <div key={i}>
                 <button
