@@ -41,12 +41,53 @@ export default function FeatureDetail() {
             </div>
           </Reveal>
           <Reveal delay={150} className="w-full lg:w-[544px] lg:shrink-0">
-            <div className="group relative overflow-hidden rounded-[24px]">
-              <img
-                src="/assets/feature1-map.png"
-                alt="전국 인력 현황 지도 — 전국 활동 근로자 1,500명+, 연결 현장 80현장"
-                className="w-full transition-transform duration-500 group-hover:scale-[1.02]"
-              />
+            {/* 지도·스탯 카드가 베이크된 저해상도 이미지 대신 코드로 합성 */}
+            <div className="group relative aspect-[544/432] overflow-hidden rounded-[24px] bg-[#e9f1fd]">
+              <p className="absolute left-7 top-6 z-10 text-[15px] font-semibold text-[#5c6b84]">
+                전국 인력 현황
+              </p>
+              <div className="absolute left-1/2 top-1/2 h-[88%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-[1.02]">
+                <img
+                  src="/assets/feature1-map.png"
+                  alt="전국 인력 현황 지도 — 전국 활동 근로자 1,500명+, 연결 현장 80현장"
+                  className="h-full w-auto"
+                />
+                {/* 활동 지역 핀 */}
+                {[
+                  { left: "27%", top: "21%", big: true }, // 서울
+                  { left: "47%", top: "38%" }, // 충청북도
+                  { left: "20%", top: "45%" }, // 충청남도
+                  { left: "67%", top: "56%" }, // 대구
+                  { left: "80%", top: "70%" }, // 부산
+                  { left: "27%", top: "72%" }, // 광주
+                  { left: "77%", top: "26%" }, // 강원 동부
+                ].map((pin, i) => (
+                  <span
+                    key={i}
+                    className="absolute -translate-x-1/2 -translate-y-1/2"
+                    style={{ left: pin.left, top: pin.top }}
+                    aria-hidden
+                  >
+                    <span className="animate-pin-pulse absolute inset-0 -m-2 rounded-full bg-primary/30" />
+                    <span
+                      className={`relative block rounded-full bg-primary ${
+                        pin.big ? "size-5 border-4 border-white" : "size-3 border-2 border-white"
+                      } shadow-[0_2px_6px_rgba(6,105,247,0.45)]`}
+                    />
+                  </span>
+                ))}
+              </div>
+              {/* 스탯 카드 */}
+              <div className="absolute bottom-6 right-6 z-10 flex gap-3">
+                <div className="rounded-[14px] bg-white px-5 py-4 shadow-[0_8px_20px_rgba(16,24,40,0.08)]">
+                  <p className="text-[12.5px] font-medium text-[#6b7280]">전국 활동 근로자</p>
+                  <p className="mt-1 text-[22px] font-bold leading-none text-primary">1,500명+</p>
+                </div>
+                <div className="rounded-[14px] bg-white px-5 py-4 shadow-[0_8px_20px_rgba(16,24,40,0.08)]">
+                  <p className="text-[12.5px] font-medium text-[#6b7280]">연결 현장</p>
+                  <p className="mt-1 text-[22px] font-bold leading-none text-primary">80현장</p>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -54,11 +95,11 @@ export default function FeatureDetail() {
         {/* POINT 02 — 노무 문서 */}
         <div className="mx-auto flex w-full max-w-[1280px] flex-col-reverse items-center gap-10 px-5 lg:flex-row lg:gap-16 lg:px-10">
           <Reveal delay={150} className="w-full lg:w-[544px] lg:shrink-0">
-            <div className="group relative overflow-hidden rounded-[24px]">
+            <div className="group relative aspect-[544/432] overflow-hidden rounded-[24px] bg-[linear-gradient(135deg,#e9f7ea_0%,#dcebfb_100%)]">
               <img
                 src="/assets/feature1-docs.png"
                 alt="노무 문서 9종 — 근로계약서, 임금명세서, 노무비 지급명세서 등"
-                className="w-full transition-transform duration-500 group-hover:scale-[1.02]"
+                className="size-full object-contain p-4 transition-transform duration-500 group-hover:scale-[1.02]"
               />
             </div>
           </Reveal>
