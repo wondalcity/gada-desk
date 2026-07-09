@@ -81,7 +81,7 @@ export default function FeatureDetail() {
                 <p>가다 데스크를 쓰면 추가 비용 없이 무료로 함께 이용합니다.</p>
               </div>
               <a
-                href="https://www.worksmate.co.kr"
+                href="https://1gada.com/office"
                 className="text-[15px] font-bold leading-6 text-primary transition-transform hover:translate-x-1"
               >
                 가다 오피스 자세히 보기 →
