@@ -4,11 +4,18 @@ import Reveal from "@/components/Reveal";
 export default function HeadlineBand() {
   return (
     <section className="relative overflow-hidden bg-white py-24 lg:py-32">
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute left-[10%] top-1/2 h-[224px] w-[245px] -translate-y-1/2 rounded-full bg-[#fdf6e0] blur-[50px]" />
-        <div className="absolute left-[28%] top-[55%] h-[224px] w-[400px] rounded-full bg-[#e8f8e9] blur-[50px]" />
-        <div className="absolute right-[10%] top-1/2 h-[224px] w-[505px] -translate-y-1/2 rounded-full bg-[#cee2ff] blur-[50px]" />
-      </div>
+      {/* blur() 필터는 클리핑 경계가 그대로 드러나 radial-gradient로 대체 */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        style={{
+          background: [
+            "radial-gradient(40% 55% at 16% 50%, #fdf6e0 0%, rgba(253,246,224,0) 75%)",
+            "radial-gradient(35% 50% at 45% 56%, #e8f8e9 0%, rgba(232,248,233,0) 75%)",
+            "radial-gradient(42% 60% at 84% 50%, #cee2ff 0%, rgba(206,226,255,0) 75%)",
+          ].join(", "),
+        }}
+      />
       <Reveal className="relative">
         <div className="mx-auto max-w-[1200px] px-6 text-center text-[28px] font-bold leading-[1.35] lg:text-[52px] lg:leading-[68px]">
           <p className="text-black">성공적인 인력사무소 운영을 위한</p>
