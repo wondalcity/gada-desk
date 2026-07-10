@@ -16,11 +16,10 @@ const notoSansKr = Noto_Sans_KR({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: '가다 데스크 — 인력사무소를 위한 SaaS',
+    default: '가다 데스크 | 인력사무소 출역·인력 관리 프로그램',
     template: '%s | 가다 데스크',
   },
-  description:
-    '당일 인력 배치, 출역 관리, 현장 마감, 일당 직접지급까지. 인력사무소의 반복 업무를 줄이고 현장 운영 데이터를 한눈에 확인하는 B2B SaaS, 가다 데스크.',
+  description: '출역·마감·정산은 디지털로, 부족한 인력은 가다로. 베타 기간 전 기능 무료.',
   applicationName: '가다 데스크',
   generator: 'Next.js',
   keywords: [
@@ -51,25 +50,23 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     url: SITE_URL,
     siteName: '가다 데스크',
-    title: '가다 데스크 — 인력사무소를 위한 SaaS',
-    description:
-      '당일 인력 배치, 출역 관리, 현장 마감, 일당 직접지급까지. 인력사무소의 반복 업무를 줄이는 가다 데스크.',
+    title: '가다 데스크 | 인력사무소 출역·인력 관리 프로그램',
+    description: '출역·마감·정산은 디지털로, 부족한 인력은 가다로. 베타 기간 전 기능 무료.',
     images: [
       {
-        url: '/opengraph-image',
+        url: '/opengraph-image.png',
         width: 1200,
         height: 630,
-        alt: '가다 데스크 — 인력사무소 운영 SaaS',
+        alt: '인력 관리부터 충원까지 가다 데스크 하나로',
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: '가다 데스크 — 인력사무소를 위한 SaaS',
-    description:
-      '당일 인력 배치, 출역 관리, 현장 마감, 일당 직접지급까지. 인력사무소의 반복 업무를 줄이는 가다 데스크.',
-    images: ['/opengraph-image'],
+    title: '가다 데스크 | 인력사무소 출역·인력 관리 프로그램',
+    description: '출역·마감·정산은 디지털로, 부족한 인력은 가다로. 베타 기간 전 기능 무료.',
+    images: ['/opengraph-image.png'],
   },
   robots: {
     index: true,
