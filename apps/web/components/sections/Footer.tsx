@@ -10,19 +10,9 @@ const LINK_COLUMNS = [
     ],
   },
   {
-    title: "블로그",
-    links: [
-      { label: "홈", href: "https://blog.1gada.com" },
-      { label: "인사이트", href: "https://blog.1gada.com" },
-      { label: "고객 사례", href: "https://blog.1gada.com" },
-      { label: "가다 소식", href: "https://blog.1gada.com" },
-      { label: "보도자료", href: "https://blog.1gada.com" },
-      { label: "실무 가이드", href: "https://blog.1gada.com" },
-    ],
-  },
-  {
     title: "채널",
     links: [
+      { label: "블로그", href: "https://blog.1gada.com" },
       { label: "유튜브", href: "https://www.youtube.com" },
       { label: "링크드인", href: "https://www.linkedin.com" },
       { label: "페이스북", href: "https://www.facebook.com" },
