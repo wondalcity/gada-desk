@@ -21,9 +21,9 @@ const TABS: Tab[] = [
     description:
       "우리 사무소 근로자의 출역 이력과 프로필을 한곳에서 관리합니다. 경력·자격·연락처는 물론 어느 현장에 며칠 나갔는지까지 기록돼, 필요한 인력을 빠르게 찾아 배치할 수 있습니다.",
     images: [
-      { src: "/assets/gallery/worker-detail.png", caption: "근로자 상세정보" },
-      { src: "/assets/gallery/worker-monthly.png", caption: "근로자 월별 근로 이력" },
-      { src: "/assets/gallery/worker-team.png", caption: "기능공 팀 정보" },
+      { src: "/assets/gallery/worker-detail.webp", caption: "근로자 상세정보" },
+      { src: "/assets/gallery/worker-monthly.webp", caption: "근로자 월별 근로 이력" },
+      { src: "/assets/gallery/worker-team.webp", caption: "기능공 팀 정보" },
     ],
   },
   {
@@ -31,9 +31,9 @@ const TABS: Tab[] = [
     description:
       "운영 중인 현장의 출역을 한눈에 관리합니다. 현장별 메모와 상태를 남겨 대응 이력을 정리할 수 있어 문제 현장을 놓치지 않습니다.",
     images: [
-      { src: "/assets/gallery/site-register.png", caption: "현장 등록" },
-      { src: "/assets/gallery/site-list.png", caption: "현장 리스트" },
-      { src: "/assets/gallery/site-detail.png", caption: "현장 정보 상세" },
+      { src: "/assets/gallery/site-register.webp", caption: "현장 등록" },
+      { src: "/assets/gallery/site-list.webp", caption: "현장 리스트" },
+      { src: "/assets/gallery/site-detail.webp", caption: "현장 정보 상세" },
     ],
   },
   {
@@ -41,9 +41,9 @@ const TABS: Tab[] = [
     description:
       "현장에 필요한 작업을 등록하고 공고·매칭·출역·마감·인원 요청까지 한 흐름에서 관리합니다. 오늘 어느 현장에 몇 명이 필요한지, 매칭은 얼마나 됐는지 실시간으로 파악할 수 있습니다.",
     images: [
-      { src: "/assets/gallery/job-register.png", caption: "신규 작업 등록" },
-      { src: "/assets/gallery/job-closing.png", caption: "현장 마감 현황" },
-      { src: "/assets/gallery/job-daily.png", caption: "일간 출역 현황" },
+      { src: "/assets/gallery/job-register.webp", caption: "신규 작업 등록" },
+      { src: "/assets/gallery/job-closing.webp", caption: "현장 마감 현황" },
+      { src: "/assets/gallery/job-daily.webp", caption: "일간 출역 현황" },
     ],
   },
   {
@@ -51,9 +51,9 @@ const TABS: Tab[] = [
     description:
       "선지급·기성 청구·미수금까지 정산 현황을 한 페이지에서 관리합니다. 월별·현장별 지급 내역을 정리해 돈이 어디서 얼마나 나가고 들어오는지 한눈에 확인할 수 있습니다.",
     images: [
-      { src: "/assets/gallery/pay-daily-close.png", caption: "일일 마감 확인하기" },
-      { src: "/assets/gallery/pay-site.png", caption: "현장별 지급 내역" },
-      { src: "/assets/gallery/pay-monthly.png", caption: "월별 지급 내역" },
+      { src: "/assets/gallery/pay-daily-close.webp", caption: "일일 마감 확인하기" },
+      { src: "/assets/gallery/pay-site.webp", caption: "현장별 지급 내역" },
+      { src: "/assets/gallery/pay-monthly.webp", caption: "월별 지급 내역" },
     ],
   },
 ];
@@ -85,6 +85,16 @@ export default function FeatureGallery() {
     }, 5000);
     return () => clearInterval(timer);
   }, [paused, activeTab, images.length]);
+
+  // 첫 표시 때 빈 화면이 뜨지 않도록 전체 이미지를 마운트 직후 미리 받아둔다
+  useEffect(() => {
+    TABS.forEach((tab) =>
+      tab.images.forEach(({ src }) => {
+        const img = new window.Image();
+        img.src = src;
+      }),
+    );
+  }, []);
 
   return (
     <section className="flex flex-col items-center gap-14 bg-white pb-28 pt-24 lg:gap-20 lg:pb-40 lg:pt-32">
