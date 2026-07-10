@@ -36,7 +36,7 @@ export default function Navigation() {
             <img src="/assets/logo-icon.svg" alt="가다" className="h-[30px] w-auto" />
             <img src="/assets/logo-text.svg" alt="데스크" className="h-[17px] w-auto" />
           </a>
-          <nav className="ml-4 hidden items-center lg:flex">
+          <nav className="ml-10 hidden items-center lg:flex">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.label}
