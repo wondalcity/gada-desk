@@ -1,22 +1,26 @@
+// 자사 도메인 링크에 공통으로 붙는 UTM (유입 추적)
+const utm = (content: string) =>
+  `utm_source=gada_desk&utm_medium=referral&utm_campaign=desk_landing&utm_content=${content}`;
+
 const LINK_COLUMNS = [
   {
     title: "홈페이지",
     links: [
-      { label: "홈", href: "https://www.worksmate.co.kr" },
-      { label: "회사소개", href: "https://www.worksmate.co.kr" },
-      { label: "건설사앱", href: "https://www.worksmate.co.kr" },
-      { label: "근로자앱", href: "https://www.worksmate.co.kr" },
-      { label: "가다오피스", href: "https://www.worksmate.co.kr" },
+      { label: "홈", href: `https://1gada.com/?${utm("footer_home")}` },
+      { label: "회사소개", href: `https://1gada.com/company?${utm("footer_company")}` },
+      { label: "건설사앱", href: `https://1gada.com/construct?${utm("footer_construct")}` },
+      { label: "근로자앱", href: `https://1gada.com/worker?${utm("footer_worker")}` },
+      { label: "가다오피스", href: `https://1gada.com/office?${utm("footer_office")}` },
     ],
   },
   {
     title: "채널",
     links: [
-      { label: "블로그", href: "https://blog.1gada.com" },
-      { label: "유튜브", href: "https://www.youtube.com" },
-      { label: "링크드인", href: "https://www.linkedin.com" },
-      { label: "페이스북", href: "https://www.facebook.com" },
-      { label: "인스타그램", href: "https://www.instagram.com" },
+      { label: "블로그", href: `https://blog.1gada.com/?${utm("footer_blog")}` },
+      { label: "유튜브", href: "https://www.youtube.com/@1gada" },
+      { label: "링크드인", href: "https://www.linkedin.com/in/gada-worksmate/" },
+      { label: "페이스북", href: "https://www.facebook.com/worksmate" },
+      { label: "인스타그램", href: "https://www.instagram.com/gada.app" },
     ],
   },
 ];
