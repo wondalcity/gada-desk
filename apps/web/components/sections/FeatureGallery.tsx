@@ -101,9 +101,9 @@ export default function FeatureGallery() {
       <Reveal>
         <div className="flex flex-col items-center gap-4 px-6 text-center">
           <p className="text-[14px] font-bold leading-[18px] text-primary">기능 자세히 보기</p>
-          <p className="text-[26px] font-bold leading-tight text-black lg:text-[40px] lg:leading-[52px]">
+          <h2 className="text-[26px] font-bold leading-tight text-black lg:text-[40px] lg:leading-[52px]">
             가다 데스크의 주요 기능을 확인해 보세요
-          </p>
+          </h2>
           <p className="text-[15px] leading-relaxed text-[#6b7280] lg:text-[17px]">
             현장·근로자·작업·문서·정산, 그리고 가다 인력 지원까지 한 곳에서
           </p>

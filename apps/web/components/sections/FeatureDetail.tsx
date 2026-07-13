@@ -7,9 +7,9 @@ export default function FeatureDetail() {
       <Reveal>
         <div className="flex flex-col items-center gap-4 px-6 text-center">
           <p className="text-[14px] font-bold leading-[18px] text-primary">가다 데스크만의 차별점</p>
-          <p className="text-[26px] font-bold leading-tight text-black lg:text-[40px] lg:leading-[52px]">
+          <h2 className="text-[26px] font-bold leading-tight text-black lg:text-[40px] lg:leading-[52px]">
             부족한 인력은 채우고, 복잡한 서류는 줄이고
-          </p>
+          </h2>
           <p className="max-w-[720px] text-[15px] leading-relaxed text-[#6b7280] lg:text-[17px]">
             대부분의 프로그램은 기록에서 끝납니다. 가다 데스크는 부족한 인력을 전국 근로자 풀로 채우고, 노무 문서
             9종까지 무료로 디지털화합니다.
@@ -28,9 +28,9 @@ export default function FeatureDetail() {
               >
                 POINT 01
               </span>
-              <h4 className="text-[26px] font-bold leading-[1.2] tracking-[-0.72px] text-black lg:text-[36px]">
+              <h3 className="text-[26px] font-bold leading-[1.2] tracking-[-0.72px] text-black lg:text-[36px]">
                 사람이 모자라면, <span className="text-primary">가다가 채워드립니다</span>
-              </h4>
+              </h3>
               <div className="flex flex-col gap-3 text-[16px] font-medium leading-[1.45] text-black/55 lg:text-[18px]">
                 <p>
                   가다 앱을 통해 전국에서 활동하는 검증된 근로자와 연결됩니다. 우리 사무소 인력이 모자랄 때, 가까운
@@ -111,9 +111,9 @@ export default function FeatureDetail() {
               >
                 POINT 02
               </span>
-              <h4 className="text-[26px] font-bold leading-[1.2] tracking-[-0.72px] text-black lg:text-[36px]">
+              <h3 className="text-[26px] font-bold leading-[1.2] tracking-[-0.72px] text-black lg:text-[36px]">
                 <span className="text-primary">노무 문서 9종</span>을 디지털로
-              </h4>
+              </h3>
               <div className="flex flex-col gap-3 text-[16px] font-medium leading-[1.45] text-black/55 lg:text-[18px]">
                 <p>
                   기존 노무 문서 업무를 디지털화해 현장 관리자의 부담을 최소화합니다. 현장 일정에 맞춘 자동 생성,

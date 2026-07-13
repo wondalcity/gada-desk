@@ -18,10 +18,10 @@ export default function HeadlineBand() {
       />
       <Reveal className="relative">
         <div className="mx-auto max-w-[1200px] px-6 text-center text-[28px] font-bold leading-[1.35] lg:text-[52px] lg:leading-[68px]">
-          <p className="text-black">성공적인 인력사무소 운영을 위한</p>
-          <p className="bg-gradient-to-r from-[#079d07] via-[#00a2ac] to-[#0669f7] bg-clip-text text-transparent">
+          <h2 className="contents font-[inherit]"><span className="block text-black">성공적인 인력사무소 운영을 위한</span>
+          <span className="block bg-gradient-to-r from-[#079d07] via-[#00a2ac] to-[#0669f7] bg-clip-text text-transparent">
             올인원 디지털 파트너, 가다 데스크
-          </p>
+          </span></h2>
         </div>
       </Reveal>
     </section>

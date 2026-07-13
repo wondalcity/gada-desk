@@ -7,9 +7,9 @@ export default function MoreServices() {
       <Reveal className="flex-1">
         <div className="flex flex-col items-start gap-8 lg:gap-12">
           <div className="flex flex-col gap-6">
-            <h4 className="text-[26px] font-bold leading-[1.2] tracking-[-0.72px] text-black lg:text-[36px]">
+            <h2 className="text-[26px] font-bold leading-[1.2] tracking-[-0.72px] text-black lg:text-[36px]">
               가다의 더 많은 서비스 알아보기
-            </h4>
+            </h2>
             <p className="text-[16px] font-medium leading-[1.45] text-black/55 lg:text-[18px]">
               스마트한 건설 현장의 시작, 가다가 제공하는
               <br className="hidden lg:block" />

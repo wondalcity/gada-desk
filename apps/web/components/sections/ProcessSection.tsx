@@ -43,9 +43,9 @@ export default function ProcessSection() {
       <Reveal>
         <div className="flex flex-col items-center gap-4 text-center">
           <p className="text-[14px] font-bold leading-[18px] text-primary">도입 절차</p>
-          <p className="text-[26px] font-bold leading-tight text-black lg:text-[40px] lg:leading-[52px]">
+          <h2 className="text-[26px] font-bold leading-tight text-black lg:text-[40px] lg:leading-[52px]">
             가입 후 무료로 사용하세요
-          </p>
+          </h2>
           <p className="text-[15px] leading-relaxed text-[#6b7280] lg:text-[17px]">
             인력사무소 확인 후 계정이 발급되면, 베타 기간 동안 전 기능을 무료로 사용합니다.
           </p>

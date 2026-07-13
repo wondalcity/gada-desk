@@ -32,18 +32,33 @@ const FAQ_ITEMS: FaqItem[] = [
 ];
 
 /** FAQ 아코디언 (Figma 88:2191) */
+// 구글 FAQ 리치 결과용 구조화 데이터
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ_ITEMS.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+};
+
 export default function FaqSection() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id="faq" className="bg-white px-5 py-24 lg:px-10 lg:py-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className="mx-auto flex max-w-[800px] flex-col items-center gap-14 lg:gap-20">
         <Reveal>
           <div className="flex flex-col items-center gap-4 text-center">
             <p className="text-[14px] font-bold leading-[18px] text-primary">자주 묻는 질문</p>
-            <p className="text-[26px] font-bold leading-tight tracking-[-1px] text-[#16181d] lg:text-[38px] lg:leading-[47.5px]">
+            <h2 className="text-[26px] font-bold leading-tight tracking-[-1px] text-[#16181d] lg:text-[38px] lg:leading-[47.5px]">
               궁금한 점이 있으신가요?
-            </p>
+            </h2>
           </div>
         </Reveal>
 
