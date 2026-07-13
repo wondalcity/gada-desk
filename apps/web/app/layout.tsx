@@ -95,6 +95,7 @@ export const metadata: Metadata = {
   },
   referrer: 'origin-when-cross-origin',
   verification: {
+    google: 'ukgbUQpihKc6_hX3XxQPJTp1tKgNqfjF91obtHV53DU',
     other: {
       'naver-site-verification': 'c20948684b268d3c53118cb4813e0e2f5019cb04',
     },
