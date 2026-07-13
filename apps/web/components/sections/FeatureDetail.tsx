@@ -49,7 +49,7 @@ export default function FeatureDetail() {
               <div className="absolute left-1/2 top-1/2 h-[88%] -translate-x-1/2 -translate-y-1/2 transition-transform duration-500 group-hover:scale-[1.02]">
                 <img
                   src="/assets/feature1-map.png"
-                  alt="전국 인력 현황 지도 — 전국 활동 근로자 약 19,000명, 누적 현장 수 6,400현장+"
+                  alt="전국 인력 현황 지도 — 전국 활동 근로자 약 2만명, 누적 현장 수 6,400현장+"
                   className="h-full w-auto"
                 />
                 {/* 활동 지역 핀 */}
@@ -81,7 +81,7 @@ export default function FeatureDetail() {
               <div className="absolute bottom-6 right-6 z-10 flex gap-3">
                 <div className="rounded-[14px] bg-white px-5 py-4 shadow-[0_8px_20px_rgba(16,24,40,0.08)]">
                   <p className="text-[12.5px] font-medium text-[#6b7280]">전국 활동 근로자</p>
-                  <p className="mt-1 text-[22px] font-bold leading-none text-primary">약 19,000명</p>
+                  <p className="mt-1 text-[22px] font-bold leading-none text-primary">약 2만명</p>
                 </div>
                 <div className="rounded-[14px] bg-white px-5 py-4 shadow-[0_8px_20px_rgba(16,24,40,0.08)]">
                   <p className="text-[12.5px] font-medium text-[#6b7280]">누적 현장 수</p>
