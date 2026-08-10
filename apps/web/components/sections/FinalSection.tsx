@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 
 /** 최종 CTA + 무료 체험 신청 폼 (Figma 88:2220) */
 export default function FinalSection() {
-  const [form, setForm] = useState({ office: "", manager: "", phone: "" });
+  const [form, setForm] = useState({ office: "", manager: "", phone: "", source: "", message: "" });
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -13,8 +13,8 @@ export default function FinalSection() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!form.office.trim() || !form.manager.trim() || !form.phone.trim()) {
-      setError("모든 항목을 입력해 주세요.");
+    if (!form.office.trim() || !form.manager.trim() || !form.phone.trim() || !form.source) {
+      setError("필수 항목을 입력해 주세요.");
       return;
     }
     if (!/^[0-9\-+() ]{9,}$/.test(form.phone.trim())) {
@@ -35,6 +35,8 @@ export default function FinalSection() {
           company: form.office.trim(),
           manager: form.manager.trim(),
           phone: form.phone.trim(),
+          source: form.source,
+          message: form.message.trim(),
         }),
       });
       if (!res.ok) throw new Error("send_failed");
@@ -110,6 +112,49 @@ export default function FinalSection() {
                   value={form.phone}
                   onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                   className="h-[54px] w-full rounded-[12px] border border-[#eaecf0] px-5 text-[15px] text-[#16181d] outline-none transition-colors placeholder:text-[#16181d]/50 focus:border-primary"
+                />
+                <div className="relative">
+                  <select
+                    value={form.source}
+                    onChange={(e) => setForm((f) => ({ ...f, source: e.target.value }))}
+                    className={`h-[54px] w-full cursor-pointer appearance-none rounded-[12px] border border-[#eaecf0] bg-white px-5 pr-12 text-[15px] outline-none transition-colors focus:border-primary ${
+                      form.source ? "text-[#16181d]" : "text-[#16181d]/50"
+                    }`}
+                  >
+                    <option value="" disabled>
+                      가다 데스크를 알게 된 경로
+                    </option>
+                    <option value="네이버 검색">네이버 검색</option>
+                    <option value="구글 검색">구글 검색</option>
+                    <option value="블로그·기사 콘텐츠">블로그·기사 콘텐츠</option>
+                    <option value="SNS·온라인 광고">SNS·온라인 광고</option>
+                    <option value="지인 추천">지인 추천</option>
+                    <option value="가다 앱 이용 중">가다 앱 이용 중</option>
+                    <option value="기타">기타</option>
+                  </select>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                    className="pointer-events-none absolute right-5 top-1/2 -translate-y-1/2 text-[#16181d]/40"
+                  >
+                    <path
+                      d="M6 9l6 6 6-6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+                <textarea
+                  placeholder="문의내용 (선택) — 궁금한 점이나 요청사항을 남겨주세요."
+                  value={form.message}
+                  onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                  rows={3}
+                  className="w-full resize-none rounded-[12px] border border-[#eaecf0] px-5 py-4 text-[15px] leading-relaxed text-[#16181d] outline-none transition-colors placeholder:text-[#16181d]/50 focus:border-primary"
                 />
                 <div className="flex flex-col gap-2 rounded-[12px] bg-[#f7f9fc] px-4 py-3">
                   <label className="flex cursor-pointer items-center gap-2 text-[13.5px] font-medium text-[#16181d]">

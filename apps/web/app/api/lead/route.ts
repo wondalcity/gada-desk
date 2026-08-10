@@ -12,6 +12,7 @@ type Body = {
   address?: string;
   phone?: string;
   plan?: string;
+  source?: string;
   message?: string;
 };
 
@@ -80,6 +81,7 @@ export async function POST(req: Request) {
   const address = body.address?.trim() ?? '';
   const phone = body.phone?.trim();
   const plan = body.plan?.trim() ?? '';
+  const source = body.source?.trim() ?? '';
   const message = body.message?.trim() ?? '';
 
   // 리뉴얼 폼은 사무소명·담당자명·연락처만 받음 — 주소·요금제는 선택 항목
@@ -118,7 +120,8 @@ export async function POST(req: Request) {
             ${row('인력사무소 주소', address || '(미입력)')}
             ${row('연락처', phone)}
             ${row('희망 요금제', plan || '(미입력)')}
-            ${row('문의 내용', message ? message.replace(/\n/g, '<br/>') : '(없음)', true)}
+            ${row('알게 된 경로', source || '(미입력)')}
+            ${row('문의 내용', message ? escapeHtml(message).replace(/\n/g, '<br/>') : '(없음)', true)}
           </tbody>
         </table>
         <div style="padding:14px 24px;background:#f8fafc;color:#64748b;font-size:12px;border-top:1px solid #e2e8f0;">
@@ -136,7 +139,8 @@ export async function POST(req: Request) {
     `담당자명: ${manager}\n` +
     `인력사무소 주소: ${address || '(미입력)'}\n` +
     `연락처: ${phone}\n` +
-    `희망 요금제: ${plan || '(미입력)'}\n\n` +
+    `희망 요금제: ${plan || '(미입력)'}\n` +
+    `알게 된 경로: ${source || '(미입력)'}\n\n` +
     `문의 내용:\n${message || '(없음)'}\n\n` +
     `${divider}\n` +
     `가다 데스크 랜딩 페이지에서 자동 발송됨\n`;
