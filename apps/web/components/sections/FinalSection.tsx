@@ -5,7 +5,14 @@ import Reveal from "@/components/Reveal";
 
 /** 최종 CTA + 무료 체험 신청 폼 (Figma 88:2220) */
 export default function FinalSection() {
-  const [form, setForm] = useState({ office: "", manager: "", phone: "", source: "", message: "" });
+  const [form, setForm] = useState({
+    office: "",
+    manager: "",
+    phone: "",
+    address: "",
+    source: "",
+    message: "",
+  });
   const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -35,6 +42,7 @@ export default function FinalSection() {
           company: form.office.trim(),
           manager: form.manager.trim(),
           phone: form.phone.trim(),
+          address: form.address.trim(),
           source: form.source,
           message: form.message.trim(),
         }),
@@ -111,6 +119,13 @@ export default function FinalSection() {
                   placeholder="연락처"
                   value={form.phone}
                   onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                  className="h-[54px] w-full rounded-[12px] border border-[#eaecf0] px-5 text-[15px] text-[#16181d] outline-none transition-colors placeholder:text-[#16181d]/50 focus:border-primary"
+                />
+                <input
+                  type="text"
+                  placeholder="인력사무소 주소 (선택)"
+                  value={form.address}
+                  onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
                   className="h-[54px] w-full rounded-[12px] border border-[#eaecf0] px-5 text-[15px] text-[#16181d] outline-none transition-colors placeholder:text-[#16181d]/50 focus:border-primary"
                 />
                 <div className="relative">
